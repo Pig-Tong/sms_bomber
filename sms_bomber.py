@@ -11,12 +11,11 @@ def get_window_size(window):
     return window.winfo_reqwidth(), window.winfo_reqheight()
 
 
-def center_window(root, width, height):
-    screenwidth = root.winfo_screenwidth()
-    screenheight = root.winfo_screenheight()
+def center_window(root1, width, height):
+    screenwidth = root1.winfo_screenwidth()
+    screenheight = root1.winfo_screenheight()
     size = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
-    print(size)
-    root.geometry(size)
+    root1.geometry(size)
 
 
 def send_sms():
@@ -43,7 +42,7 @@ def btnClick():
         textLabel['text'] = "手机号不正确"
         return
     textLabel['text'] = "即将向：" + str(entry_phone.get()) + "发送短信"
-    send_sms()
+    # send_sms()
 
 
 root = Tk(className="短信轰炸机v1.0", )
@@ -65,9 +64,16 @@ entry_phone.pack(side=TOP)
 textLabel = Label(root, text='提示显示', justify=LEFT, padx=10)
 textLabel.pack(side=TOP)
 
+# 提示画布
+cv = Canvas(root, bg='white', height="200", relief=RAISED)
+# 创建一个矩形，坐标为(10,10,110,110)
+cv.create_rectangle(10, 10, 50, 50)
+cv.create_text(100, 50, text="FishC")
+cv.pack()
+
 # 按钮
 btn = Button(root)
-btn['text'] = '点击测试'
+btn['text'] = '点击发送'
 btn['command'] = btnClick
 btn.pack(side=BOTTOM)
 
